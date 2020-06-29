@@ -69,7 +69,10 @@ if st.button('Lets find.'):
     text = ','.join(mv_tags_list_sim.sort_values(by = 'neg_jaccard_sim', ascending = False).head(25)['tag_list2'].values)
     final_list=mv_tags_list_sim.sort_values(['neg_jaccard_sim', 'jaccard_sim'], ascending = [True, False]).head(20)
     
-    
+    my_bar = st.progress(0)
+    for percent_complete in range(100):
+        time.sleep(0.005)
+        my_bar.progress(percent_complete + 1)
     final_list.to_csv('Recommendations.csv')
     st.header('The Ad Recommendations are:')
     st.dataframe(final_list[['Title']])
